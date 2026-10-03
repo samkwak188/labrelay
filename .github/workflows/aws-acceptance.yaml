@@ -1,0 +1,29 @@
+name: Restricted real S3 acceptance
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  acceptance:
+    if: github.ref == 'refs/heads/main'
+    environment: aws-acceptance
+    permissions:
+      contents: read
+      id-token: write
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-go@v6
+        with: {go-version: '1.27.1', cache: true}
+      - uses: aws-actions/configure-aws-credentials@v5
+        with:
+          role-to-assume: ${{ vars.AWS_ACCEPTANCE_ROLE_ARN }}
+          aws-region: us-east-2
+      - run: docker compose up -d --wait postgres
+      - run: bash scripts/aws-test.sh 2>&1 | tee aws-acceptance.log
+        env:
+          DATABASE_URL: postgres://labrelay:local-development-only@127.0.0.1:15432/labrelay?sslmode=disable
+          S3_BUCKET: ${{ vars.AWS_ACCEPTANCE_BUCKET }}
+          AWS_REGION: us-east-2
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: aws-acceptance, path: aws-acceptance.log}

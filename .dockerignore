@@ -1,0 +1,8 @@
+.git
+.env
+bin
+results
+infra
+docs
+.terraform
+**/*.sqlite*

@@ -1,0 +1,27 @@
+name: labrelay
+services:
+  postgres:
+    image: postgres:18.0@sha256:41fc5342eefba6cc2ccda736aaf034bbbb7c3df0fdb81516eba1ba33f360162c
+    environment:
+      POSTGRES_USER: labrelay
+      POSTGRES_PASSWORD: local-development-only
+      POSTGRES_DB: labrelay
+    ports: ["127.0.0.1:15432:5432"]
+    volumes: ["catalog:/var/lib/postgresql"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U labrelay -d labrelay"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+  seaweed:
+    image: chrislusf/seaweedfs@sha256:4e61d15fd35994cb1e43e1e553dff106794841fd9a99ade2fc8c8bfce4d7872d
+    command: ["mini", "-dir=/data"]
+    environment:
+      AWS_ACCESS_KEY_ID: labrelay-local
+      AWS_SECRET_ACCESS_KEY: local-development-only
+      S3_BUCKET: labrelay-local
+    ports: ["127.0.0.1:18333:8333"]
+    volumes: ["objects:/data"]
+volumes:
+  catalog:
+  objects:

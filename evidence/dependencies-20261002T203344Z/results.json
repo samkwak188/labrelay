@@ -1,0 +1,12 @@
+[
+  {
+    "dependency": "seaweed",
+    "status": "pass",
+    "recovery_seconds": 3.977418456000123
+  },
+  {
+    "dependency": "postgres",
+    "status": "pass",
+    "recovery_seconds": 4.751772994000021
+  }
+]

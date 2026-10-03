@@ -1,0 +1,81 @@
+[
+  {
+    "scenario": "attempt_reserved",
+    "status": "pass",
+    "seconds": 0.4013985000001412,
+    "detail": {
+      "revision": "1015460a-78a8-4f86-8ade-bfc25ae12c52",
+      "upload_id": "c82be758-0234-41e9-8eb4-05c571aa3f3b+07b82fadc08c79f5387513f79da09c0722ab2170_0f745ac6fdd04720b4e7e02c42c2ee44"
+    }
+  },
+  {
+    "scenario": "attempt_storage_created",
+    "status": "pass",
+    "seconds": 0.39197923799929413,
+    "detail": {
+      "revision": "a5ef5a49-92e6-4c65-b5d9-4c6e7e92096c",
+      "upload_id": "c0ca7425-ad22-4daa-844f-f04217e3f411+a70d3f12c058ab12efbe5cd2fbf5d01c238177e2_893013b05c4f427988e2488541d6470e"
+    }
+  },
+  {
+    "scenario": "attempt_committed",
+    "status": "pass",
+    "seconds": 0.38472715399984736,
+    "detail": {
+      "revision": "b220582a-152f-4492-bfd2-997afed6e718",
+      "upload_id": "a8196ec6-ee0a-4c95-a99e-3dcda14788e5+b9bbc5fff273203b574af4e108ac2576b948682c_5f2e59f5d2c14541a37a708b295ec1e9"
+    }
+  },
+  {
+    "scenario": "object_verified",
+    "status": "pass",
+    "seconds": 0.39085671399971034,
+    "detail": {
+      "revision": "3b2af7e2-3dd3-4673-95e4-8265aa9b05aa"
+    }
+  },
+  {
+    "scenario": "before_publication_commit",
+    "status": "pass",
+    "seconds": 0.5233036820000052,
+    "detail": {
+      "revision": "2ce95196-cf88-47a0-89fc-f781479aec5a"
+    }
+  },
+  {
+    "scenario": "after_publication_commit",
+    "status": "pass",
+    "seconds": 0.2932498159998431,
+    "detail": {
+      "revision": "05593a83-a76a-4f3f-8310-fb7901d63250"
+    }
+  },
+  {
+    "scenario": "SIGKILL_after_acknowledged_PATCH",
+    "status": "pass",
+    "seconds": 0.4917970630003765,
+    "detail": {
+      "acknowledged_offset": 8388608,
+      "remaining_bytes": 3,
+      "revision": "dcbbb622-10f8-45ad-9413-d6d94259e5b2"
+    }
+  },
+  {
+    "scenario": "lost_creation_and_PATCH_responses",
+    "status": "pass",
+    "seconds": 6.41421043399987,
+    "detail": {
+      "seconds": 5.479573194000295,
+      "source_bytes": 16777233,
+      "sync": {
+        "after_upload_seconds": 1.011825077,
+        "bytes_sent": 20971537,
+        "synced": true,
+        "upload_window_seconds": 4.268646254
+      },
+      "dropped_creation_responses": 1,
+      "dropped_patch_responses": 1,
+      "interrupted_patch_bodies": 1
+    }
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "commit": "26c14d651e2acf06dec4c90a0ba5aae530a3508c",
+  "artifacts": [
+    {
+      "path": "data/scenes/chiangmai_intersection.json",
+      "url": "https://raw.githubusercontent.com/samkwak188/CATS-Lab----temporal-roadside-calibration/26c14d651e2acf06dec4c90a0ba5aae530a3508c/data/scenes/chiangmai_intersection.json",
+      "sha256": "a520680ed718728bd17c5f096d97cd3010ab7a6e813409393ca532c1a4716de3"
+    },
+    {
+      "path": "data/frames/chiangmai_intersection/manifest.json",
+      "url": "https://raw.githubusercontent.com/samkwak188/CATS-Lab----temporal-roadside-calibration/26c14d651e2acf06dec4c90a0ba5aae530a3508c/data/frames/chiangmai_intersection/manifest.json",
+      "sha256": "186914db7e214da5bd9b1106f0b5a0b28b8dfe671b0ae2c9007b9c544986396e"
+    },
+    {
+      "path": "data/frames/chiangmai_intersection/manifest.csv",
+      "url": "https://raw.githubusercontent.com/samkwak188/CATS-Lab----temporal-roadside-calibration/26c14d651e2acf06dec4c90a0ba5aae530a3508c/data/frames/chiangmai_intersection/manifest.csv",
+      "sha256": "3444842b00e2abaaa25efd09094966aec24b6f17f6aa0d56b796bd957d5ec977"
+    }
+  ]
+}

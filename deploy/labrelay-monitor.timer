@@ -1,0 +1,7 @@
+[Unit]
+Description=LabRelay one-minute health sampling
+[Timer]
+OnBootSec=60
+OnUnitActiveSec=60
+[Install]
+WantedBy=timers.target

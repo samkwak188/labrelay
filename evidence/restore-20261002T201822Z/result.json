@@ -1,0 +1,8 @@
+{
+  "kind": "local-new-database-restore",
+  "status": "pass",
+  "published_references_checked": 9,
+  "seconds": 1.6795779069998389,
+  "restored_database": "labrelay_restore_92254b3b4d4e4b69aebbed5565260cc8",
+  "fresh_cloud_host": false
+}

@@ -1,0 +1,12 @@
+.env
+.cache/
+bin/
+dist/
+**/__pycache__/
+*.tfvars
+*.tfstate*
+.terraform/
+*.tfplan
+results/local/
+*.sqlite*
+/spool/

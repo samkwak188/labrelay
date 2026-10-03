@@ -1,0 +1,62 @@
+[
+  {
+    "workload": "cats",
+    "prepare": {
+      "seconds": 0.5189841869996599,
+      "result": {
+        "bundle_id": "de943449e8139e51783f92a8cab9eb0368004cb3463d27c21cdd96c4f7052c2d",
+        "bytes": 107490063,
+        "dry_run": false,
+        "files": 33
+      }
+    },
+    "sync": {
+      "seconds": 2.6608874889998333,
+      "result": {
+        "after_upload_seconds": 1.019967171,
+        "bytes_sent": 107490063,
+        "synced": true,
+        "upload_window_seconds": 1.491512769
+      }
+    },
+    "revision": "05cf4efe-4ff7-45c2-8f42-f935648f303d",
+    "fetch": {
+      "seconds": 0.6559904510004344,
+      "result": {
+        "destination": "/tmp/labrelay-workloads-uaop8ifw/cats-download",
+        "verified": true
+      }
+    },
+    "status": "pass"
+  },
+  {
+    "workload": "many-5000",
+    "prepare": {
+      "seconds": 6.705855512000198,
+      "result": {
+        "bundle_id": "2b98ffd87299c7953582b5b2974af1fde68fac1804ec94facbe422c7e71af988",
+        "bytes": 20480000,
+        "dry_run": false,
+        "files": 5000
+      }
+    },
+    "sync": {
+      "seconds": 69.13020571099969,
+      "result": {
+        "after_upload_seconds": 1.159930651,
+        "bytes_sent": 20480000,
+        "synced": true,
+        "upload_window_seconds": 72.27415335
+      }
+    },
+    "revision": "d4e1a7e0-4dac-4ab7-b0de-b1c7fa9954cf",
+    "fetch": {
+      "seconds": 24.417706190999525,
+      "result": {
+        "destination": "/tmp/labrelay-workloads-uaop8ifw/many-5000-download",
+        "verified": true
+      }
+    },
+    "status": "pass"
+  }
+]

@@ -1,0 +1,200 @@
+openapi: 3.1.0
+info:
+  title: LabRelay
+  version: 0.1.0
+  description: Immutable manifests, resumable transfers, independently verified version-pinned publication. One server instance only.
+security:
+  - bearer: []
+paths:
+  /v1/projects/{project}/datasets/{name}/ingestions:
+    parameters:
+      - {name: project, in: path, required: true, schema: {type: string}}
+      - {name: name, in: path, required: true, schema: {type: string}}
+    post:
+      summary: Register exact manifest bytes; retry=true explicitly replaces a terminal unsuccessful session
+      parameters:
+        - {name: retry, in: query, schema: {type: boolean, default: false}}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/Manifest'}
+      responses:
+        '200': {$ref: '#/components/responses/State'}
+        default: {$ref: '#/components/responses/Error'}
+        '409': {description: Explicit retry required}
+        '413': {description: Manifest or reservation limit exceeded}
+  /v1/ingestions/{id}:
+    parameters:
+      - {name: id, in: path, required: true, schema: {type: string}}
+    get:
+      summary: Ingestion, expected files, attempts, errors and receipt
+      responses:
+        '200': {$ref: '#/components/responses/State'}
+        default: {$ref: '#/components/responses/Error'}
+  /v1/ingestions/{id}/files/{file_id}/attempts:
+    parameters:
+      - {name: id, in: path, required: true, schema: {type: string}}
+      - {name: file_id, in: path, required: true, schema: {type: string}}
+    post:
+      summary: Obtain an existing upload URL or durably create an attempt
+      responses:
+        '200':
+          description: Durable attempt and actual tus upload URL
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [attempt_id, upload_id, url]
+                properties:
+                  attempt_id: {type: string}
+                  upload_id: {type: string}
+                  url: {type: string, description: Same-origin relative URL; retain the actual composite tus ID}
+        default: {$ref: '#/components/responses/Error'}
+        '409': {description: Ingestion no longer accepts uploads}
+  /v1/ingestions/{id}/finalize:
+    parameters:
+      - {name: id, in: path, required: true, schema: {type: string}}
+    post:
+      summary: Request verification and atomic publication; repeated calls are safe
+      responses:
+        '200': {$ref: '#/components/responses/State'}
+        default: {$ref: '#/components/responses/Error'}
+  /uploads/{upload_id}:
+    parameters:
+      - {name: upload_id, in: path, required: true, schema: {type: string}}
+    head:
+      summary: Authorized tus 1.0 offset query
+      parameters:
+        - {name: Tus-Resumable, in: header, required: true, schema: {const: '1.0.0'}}
+      responses:
+        '200':
+          description: Current authoritative upload offset
+          headers:
+            Upload-Offset: {schema: {type: integer, minimum: 0}, description: Authoritative accepted bytes}
+            Upload-Length: {schema: {type: integer, minimum: 0}, description: Declared immutable file length}
+    patch:
+      summary: Authorized tus 1.0 append; maximum body 8 MiB
+      parameters:
+        - {name: Tus-Resumable, in: header, required: true, schema: {const: '1.0.0'}}
+        - {name: Upload-Offset, in: header, required: true, schema: {type: integer, minimum: 0}}
+      requestBody:
+        required: true
+        content:
+          application/offset+octet-stream:
+            schema: {type: string, format: binary, maxLength: 8388608}
+      responses:
+        '204': {description: Accepted offset}
+        '409': {description: Offset conflict}
+  /v1/projects/{project}/revisions:
+    parameters:
+      - {name: project, in: path, required: true, schema: {type: string}}
+    get:
+      responses:
+        '200': {description: Published revision summaries}
+  /v1/revisions/{id}:
+    parameters:
+      - {name: id, in: path, required: true, schema: {type: string}}
+    get:
+      responses:
+        '200': {$ref: '#/components/responses/State'}
+        default: {$ref: '#/components/responses/Error'}
+  /v1/revisions/{id}/files/{file_id}:
+    parameters:
+      - {name: id, in: path, required: true, schema: {type: string}}
+      - {name: file_id, in: path, required: true, schema: {type: string}}
+    get:
+      responses:
+        '200': {description: Exact verified object version, application/octet-stream}
+  /health/live:
+    get:
+      security: []
+      responses:
+        '200': {description: Process running}
+  /health/ready:
+    get:
+      security: []
+      responses:
+        '200': {description: Dependencies available and maintenance disabled}
+        '503': {description: Not ready}
+  /metrics:
+    get:
+      security: []
+      responses:
+        '200': {description: Prometheus metrics; bind service to loopback}
+components:
+  responses:
+    State:
+      description: Ingestion state; READY includes an immutable revision and verified object tuples
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/State'}
+    Error:
+      description: Stable application error (tus protocol errors retain tus semantics)
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/Error'}
+  securitySchemes:
+    bearer: {type: http, scheme: bearer}
+  schemas:
+    State:
+      type: object
+      required: [id, project, name, manifest_sha256, state, manifest_bytes, files, expires_at]
+      properties:
+        id: {type: string}
+        project: {type: string}
+        name: {type: string}
+        manifest_sha256: {type: string, pattern: '^[0-9a-f]{64}$'}
+        state: {enum: [STAGING, VERIFYING, READY, FAILED, EXPIRED]}
+        manifest_bytes: {type: string, contentEncoding: base64, description: Exact original bytes including whitespace; decode before hashing}
+        expires_at: {type: string, format: date-time}
+        published_at: {type: string, format: date-time}
+        revision_id: {type: string}
+        error: {type: string}
+        files:
+          type: array
+          items:
+            type: object
+            required: [id, path, size_bytes, sha256, verified]
+            properties:
+              id: {type: string}
+              path: {type: string}
+              size_bytes: {type: integer, minimum: 0}
+              sha256: {type: string}
+              verified: {type: boolean}
+              attempt_id: {type: string}
+              upload_id: {type: string}
+              bucket: {type: string}
+              object_key: {type: string}
+              version_id: {type: string}
+              error: {type: string}
+    Manifest:
+      type: object
+      additionalProperties: false
+      required: [schema_version, name, source_type, files]
+      properties:
+        schema_version: {const: 1}
+        name: {type: string, pattern: '^[a-zA-Z0-9][a-zA-Z0-9._-]{0,127}$'}
+        source_type: {enum: [generic, cats]}
+        provenance: {type: array, items: {type: string}}
+        files:
+          type: array
+          minItems: 1
+          maxItems: 5000
+          items:
+            type: object
+            additionalProperties: false
+            required: [path, role, size_bytes, sha256]
+            properties:
+              path: {type: string, maxLength: 1024}
+              role: {type: string}
+              size_bytes: {type: integer, minimum: 0, maximum: 2147483648}
+              sha256: {type: string, pattern: '^[0-9a-f]{64}$'}
+    Error:
+      type: object
+      required: [code, message, retryable, request_id]
+      properties:
+        code: {type: string}
+        message: {type: string}
+        retryable: {type: boolean}
+        request_id: {type: string}

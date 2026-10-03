@@ -1,0 +1,449 @@
+{
+  "source_video": "data/raw_videos/chiangmai_intersection.ogv",
+  "output_dir": "data/frames/chiangmai_intersection",
+  "manifest_csv": "data/frames/chiangmai_intersection/manifest.csv",
+  "saved_frame_count": 29,
+  "source_frame_count": 434,
+  "source_fps": 29.97002997002997,
+  "source_width": 1920,
+  "source_height": 1080,
+  "extraction": {
+    "every_n_frames": 15,
+    "start_frame": 0,
+    "max_frames": 0,
+    "prefix": "frame",
+    "ext": "png",
+    "overwrite": true
+  },
+  "frames": [
+    {
+      "saved_index": 0,
+      "source_frame": 0,
+      "timestamp_sec": 0.0,
+      "path": "data/frames/chiangmai_intersection/frame_000000.png"
+    },
+    {
+      "saved_index": 1,
+      "source_frame": 15,
+      "timestamp_sec": 0.5005000000000001,
+      "path": "data/frames/chiangmai_intersection/frame_000001.png"
+    },
+    {
+      "saved_index": 2,
+      "source_frame": 30,
+      "timestamp_sec": 1.0010000000000001,
+      "path": "data/frames/chiangmai_intersection/frame_000002.png"
+    },
+    {
+      "saved_index": 3,
+      "source_frame": 45,
+      "timestamp_sec": 1.5015,
+      "path": "data/frames/chiangmai_intersection/frame_000003.png"
+    },
+    {
+      "saved_index": 4,
+      "source_frame": 60,
+      "timestamp_sec": 2.0020000000000002,
+      "path": "data/frames/chiangmai_intersection/frame_000004.png"
+    },
+    {
+      "saved_index": 5,
+      "source_frame": 75,
+      "timestamp_sec": 2.5025,
+      "path": "data/frames/chiangmai_intersection/frame_000005.png"
+    },
+    {
+      "saved_index": 6,
+      "source_frame": 90,
+      "timestamp_sec": 3.003,
+      "path": "data/frames/chiangmai_intersection/frame_000006.png"
+    },
+    {
+      "saved_index": 7,
+      "source_frame": 105,
+      "timestamp_sec": 3.5035000000000003,
+      "path": "data/frames/chiangmai_intersection/frame_000007.png"
+    },
+    {
+      "saved_index": 8,
+      "source_frame": 120,
+      "timestamp_sec": 4.0040000000000004,
+      "path": "data/frames/chiangmai_intersection/frame_000008.png"
+    },
+    {
+      "saved_index": 9,
+      "source_frame": 135,
+      "timestamp_sec": 4.5045,
+      "path": "data/frames/chiangmai_intersection/frame_000009.png"
+    },
+    {
+      "saved_index": 10,
+      "source_frame": 150,
+      "timestamp_sec": 5.005,
+      "path": "data/frames/chiangmai_intersection/frame_000010.png"
+    },
+    {
+      "saved_index": 11,
+      "source_frame": 165,
+      "timestamp_sec": 5.5055000000000005,
+      "path": "data/frames/chiangmai_intersection/frame_000011.png"
+    },
+    {
+      "saved_index": 12,
+      "source_frame": 180,
+      "timestamp_sec": 6.006,
+      "path": "data/frames/chiangmai_intersection/frame_000012.png"
+    },
+    {
+      "saved_index": 13,
+      "source_frame": 195,
+      "timestamp_sec": 6.5065,
+      "path": "data/frames/chiangmai_intersection/frame_000013.png"
+    },
+    {
+      "saved_index": 14,
+      "source_frame": 210,
+      "timestamp_sec": 7.007000000000001,
+      "path": "data/frames/chiangmai_intersection/frame_000014.png"
+    },
+    {
+      "saved_index": 15,
+      "source_frame": 225,
+      "timestamp_sec": 7.5075,
+      "path": "data/frames/chiangmai_intersection/frame_000015.png"
+    },
+    {
+      "saved_index": 16,
+      "source_frame": 240,
+      "timestamp_sec": 8.008000000000001,
+      "path": "data/frames/chiangmai_intersection/frame_000016.png"
+    },
+    {
+      "saved_index": 17,
+      "source_frame": 255,
+      "timestamp_sec": 8.5085,
+      "path": "data/frames/chiangmai_intersection/frame_000017.png"
+    },
+    {
+      "saved_index": 18,
+      "source_frame": 270,
+      "timestamp_sec": 9.009,
+      "path": "data/frames/chiangmai_intersection/frame_000018.png"
+    },
+    {
+      "saved_index": 19,
+      "source_frame": 285,
+      "timestamp_sec": 9.509500000000001,
+      "path": "data/frames/chiangmai_intersection/frame_000019.png"
+    },
+    {
+      "saved_index": 20,
+      "source_frame": 300,
+      "timestamp_sec": 10.01,
+      "path": "data/frames/chiangmai_intersection/frame_000020.png"
+    },
+    {
+      "saved_index": 21,
+      "source_frame": 315,
+      "timestamp_sec": 10.5105,
+      "path": "data/frames/chiangmai_intersection/frame_000021.png"
+    },
+    {
+      "saved_index": 22,
+      "source_frame": 330,
+      "timestamp_sec": 11.011000000000001,
+      "path": "data/frames/chiangmai_intersection/frame_000022.png"
+    },
+    {
+      "saved_index": 23,
+      "source_frame": 345,
+      "timestamp_sec": 11.5115,
+      "path": "data/frames/chiangmai_intersection/frame_000023.png"
+    },
+    {
+      "saved_index": 24,
+      "source_frame": 360,
+      "timestamp_sec": 12.012,
+      "path": "data/frames/chiangmai_intersection/frame_000024.png"
+    },
+    {
+      "saved_index": 25,
+      "source_frame": 375,
+      "timestamp_sec": 12.512500000000001,
+      "path": "data/frames/chiangmai_intersection/frame_000025.png"
+    },
+    {
+      "saved_index": 26,
+      "source_frame": 390,
+      "timestamp_sec": 13.013,
+      "path": "data/frames/chiangmai_intersection/frame_000026.png"
+    },
+    {
+      "saved_index": 27,
+      "source_frame": 405,
+      "timestamp_sec": 13.5135,
+      "path": "data/frames/chiangmai_intersection/frame_000027.png"
+    },
+    {
+      "saved_index": 28,
+      "source_frame": 420,
+      "timestamp_sec": 14.014000000000001,
+      "path": "data/frames/chiangmai_intersection/frame_000028.png"
+    }
+  ],
+  "frame_files": [
+    {
+      "path": "data/frames/chiangmai_intersection/frame_000000.png",
+      "exists": true,
+      "size_bytes": 2479907,
+      "sha256": "44cf3ad5f57737672930cd18b4a00a38dc7e575a4d1af0ad3929b2697b8e190b"
+    },
+    {
+      "path": "data/frames/chiangmai_intersection/frame_000001.png",
+      "exists": true,
+      "size_bytes": 2415727,
+      "sha256": "3c56c8cafd206260905cf8bda3f4e9be863931c59a9e2238bf89bfe708676066"
+    },
+    {
+      "path": "data/frames/chiangmai_intersection/frame_000002.png",
+      "exists": true,
+      "size_bytes": 2450989,
+      "sha256": "4a95a6304228729238d39a9520f2a9da77d7845e08e299ae6053ccc60f254e64"
+    },
+    {
+      "path": "data/frames/chiangmai_intersection/frame_000003.png",
+      "exists": true,
+      "size_bytes": 2427931,
+      "sha256": "5574e3c23f6af60b08dca0083a45f6d0b66044885b6a396cc8bf153e36056fe8"
+    },
+    {
+      "path": "data/frames/chiangmai_intersection/frame_000004.png",
+      "exists": true,
+      "size_bytes": 2502723,
+      "sha256": "dbb144011fe83629daec57cac658638655ba48f64b6f512531a140b0cf6a810b"
+    },
+    {
+      "path": "data/frames/chiangmai_intersection/frame_000005.png",
+      "exists": true,
+      "size_bytes": 2498929,
+      "sha256": "48bfb3240b6d85f0bea74283d155a9e11c81d2453d34db37d1656b2a57caa674"
+    },
+    {
+      "path": "data/frames/chiangmai_intersection/frame_000006.png",
+      "exists": true,
+      "size_bytes": 2515192,
+      "sha256": "c035cda3df18375da6026f75173b8a7452b6ea00359ed867903dc5ef157c1926"
+    },
+    {
+      "path": "data/frames/chiangmai_intersection/frame_000007.png",
+      "exists": true,
+      "size_bytes": 2451290,
+      "sha256": "a3af05ddb634f53e6815b3d15807ddfcebf91ebd57e3340647c57f15020b19f0"
+    },
+    {
+      "path": "data/frames/chiangmai_intersection/frame_000008.png",
+      "exists": true,
+      "size_bytes": 2504044,
+      "sha256": "e2634e8c1bd947f69e64fdbfa1362d13b3641c23f198f9aae712060f2ad348d7"
+    },
+    {
+      "path": "data/frames/chiangmai_intersection/frame_000009.png",
+      "exists": true,
+      "size_bytes": 2428038,
+      "sha256": "3dfb8b4032aeccfca4080021d7a8ecb42f19ca0cef2443fde4e4503bc037ec40"
+    },
+    {
+      "path": "data/frames/chiangmai_intersection/frame_000010.png",
+      "exists": true,
+      "size_bytes": 2499373,
+      "sha256": "6c587ee4578aa26d1a736db52ac6ca7016ed4dd85483507a6206eaba13a9b444"
+    },
+    {
+      "path": "data/frames/chiangmai_intersection/frame_000011.png",
+      "exists": true,
+      "size_bytes": 2509074,
+      "sha256": "05fd3d079d678c4cc23366fb367cbcb1eee22b162211faed991e52e7b9076de5"
+    },
+    {
+      "path": "data/frames/chiangmai_intersection/frame_000012.png",
+      "exists": true,
+      "size_bytes": 2504104,
+      "sha256": "fca77218daa39559bed328fd386c5381df3d18c4873fb3f0d9f1e4055d0cf4fa"
+    },
+    {
+      "path": "data/frames/chiangmai_intersection/frame_000013.png",
+      "exists": true,
+      "size_bytes": 2431457,
+      "sha256": "d34f56df21cc34ee0ad8d15318ee65d11ba76df2cbb1953f5beced45db092a72"
+    },
+    {
+      "path": "data/frames/chiangmai_intersection/frame_000014.png",
+      "exists": true,
+      "size_bytes": 2468405,
+      "sha256": "8a3d078d4bb4235dce4752b82bf1b63d5038fc55a66d28f6e5c4c56e09fa8812"
+    },
+    {
+      "path": "data/frames/chiangmai_intersection/frame_000015.png",
+      "exists": true,
+      "size_bytes": 2448088,
+      "sha256": "ae1dd0ac059ff02857f7bed9fd669d830794d1dc961f5403e25b6e64445c1090"
+    },
+    {
+      "path": "data/frames/chiangmai_intersection/frame_000016.png",
+      "exists": true,
+      "size_bytes": 2491653,
+      "sha256": "677bb758ee8e163d57c76345316aa3d8f41ce58ffc7ac8550f1313ed6e508686"
+    },
+    {
+      "path": "data/frames/chiangmai_intersection/frame_000017.png",
+      "exists": true,
+      "size_bytes": 2442096,
+      "sha256": "82377468a4abfea69384b573d51a15cb07c60490e9738c5a29805f94e62326f9"
+    },
+    {
+      "path": "data/frames/chiangmai_intersection/frame_000018.png",
+      "exists": true,
+      "size_bytes": 2493646,
+      "sha256": "dc4482d516870cdab06b4d82698730bd2838dd88340d0519eb5cc14807099d50"
+    },
+    {
+      "path": "data/frames/chiangmai_intersection/frame_000019.png",
+      "exists": true,
+      "size_bytes": 2388322,
+      "sha256": "bb35e759dcabd0acecbc142e17591d9b6db88495c893a404c4f657d0db6a6912"
+    },
+    {
+      "path": "data/frames/chiangmai_intersection/frame_000020.png",
+      "exists": true,
+      "size_bytes": 2554076,
+      "sha256": "d9d95e2ebf700013f9a075f7cdf4152181c5e1c8d9cd94e307f648a15c54fb0e"
+    },
+    {
+      "path": "data/frames/chiangmai_intersection/frame_000021.png",
+      "exists": true,
+      "size_bytes": 2592305,
+      "sha256": "12dca861da682e3bc3da7ca60061975a7473ece30c942cb0076ddb5ef724c904"
+    },
+    {
+      "path": "data/frames/chiangmai_intersection/frame_000022.png",
+      "exists": true,
+      "size_bytes": 2659494,
+      "sha256": "7ccaf31a40cf4214e04a877a0f9c8482c52fa5dff02cad5ceb62b2cd330c053f"
+    },
+    {
+      "path": "data/frames/chiangmai_intersection/frame_000023.png",
+      "exists": true,
+      "size_bytes": 2617901,
+      "sha256": "892a3c2a3d2a039e196e254bf910889ebe99724b8fd290966c8137075e3631b4"
+    },
+    {
+      "path": "data/frames/chiangmai_intersection/frame_000024.png",
+      "exists": true,
+      "size_bytes": 2649394,
+      "sha256": "b8d0e893d2dc1c9e3f22290cddbd6357f998651c97ec46bcd80564dee517848e"
+    },
+    {
+      "path": "data/frames/chiangmai_intersection/frame_000025.png",
+      "exists": true,
+      "size_bytes": 2649719,
+      "sha256": "e7fdab05ba1aecc614f7caa3203cb3bbad1e60ef58cddbee1e7bf15256d08456"
+    },
+    {
+      "path": "data/frames/chiangmai_intersection/frame_000026.png",
+      "exists": true,
+      "size_bytes": 2655282,
+      "sha256": "ef4fa5659e918f094240dabc611180a5615d7f9d3048cf06a1243e41974c0be8"
+    },
+    {
+      "path": "data/frames/chiangmai_intersection/frame_000027.png",
+      "exists": true,
+      "size_bytes": 2581103,
+      "sha256": "49b8363696fa878379a41c44bf594311df44d8fb3b7823b40f625e37593b512d"
+    },
+    {
+      "path": "data/frames/chiangmai_intersection/frame_000028.png",
+      "exists": true,
+      "size_bytes": 2636170,
+      "sha256": "efa5df08d0813caadaf0b9f1d046fe67e291454fc1437deb93bbc447d69ce9ff"
+    }
+  ],
+  "provenance": {
+    "created_utc": "2026-07-05T22:25:50.442712+00:00",
+    "cwd": "/Users/samkwak/Desktop/1. CATS lab",
+    "argv": [
+      "scripts/extract_frames.py",
+      "--video",
+      "data/raw_videos/chiangmai_intersection.ogv",
+      "--out-dir",
+      "data/frames/chiangmai_intersection",
+      "--every-n-frames",
+      "15",
+      "--ext",
+      "png",
+      "--overwrite"
+    ],
+    "script": {
+      "path": "/Users/samkwak/Desktop/1. CATS lab/scripts/extract_frames.py",
+      "exists": true,
+      "size_bytes": 6770,
+      "sha256": "5d48644a63235a43d672be844926800ee6d581e9401d340f9e2becf68b76bfc6"
+    },
+    "environment": {
+      "python_version": "3.9.6 (default, Mar  6 2026, 16:22:43) \n[Clang 21.0.0 (clang-2100.0.123.102)]",
+      "platform": "macOS-26.4-arm64-arm-64bit",
+      "machine": "arm64",
+      "packages": {
+        "opencv": "4.13.0",
+        "numpy": "1.26.4"
+      }
+    },
+    "inputs": [
+      {
+        "path": "data/raw_videos/chiangmai_intersection.ogv",
+        "exists": true,
+        "size_bytes": 34524975,
+        "sha256": "1fea03b98e8a058b6ac31eac291cad9a309b433bb15ab472d1b4b7fc8b4d60d4"
+      }
+    ],
+    "declared_outputs": [
+      "data/frames/chiangmai_intersection/manifest.csv",
+      "data/frames/chiangmai_intersection/manifest.json",
+      "data/frames/chiangmai_intersection/frame_000000.png",
+      "data/frames/chiangmai_intersection/frame_000001.png",
+      "data/frames/chiangmai_intersection/frame_000002.png",
+      "data/frames/chiangmai_intersection/frame_000003.png",
+      "data/frames/chiangmai_intersection/frame_000004.png",
+      "data/frames/chiangmai_intersection/frame_000005.png",
+      "data/frames/chiangmai_intersection/frame_000006.png",
+      "data/frames/chiangmai_intersection/frame_000007.png",
+      "data/frames/chiangmai_intersection/frame_000008.png",
+      "data/frames/chiangmai_intersection/frame_000009.png",
+      "data/frames/chiangmai_intersection/frame_000010.png",
+      "data/frames/chiangmai_intersection/frame_000011.png",
+      "data/frames/chiangmai_intersection/frame_000012.png",
+      "data/frames/chiangmai_intersection/frame_000013.png",
+      "data/frames/chiangmai_intersection/frame_000014.png",
+      "data/frames/chiangmai_intersection/frame_000015.png",
+      "data/frames/chiangmai_intersection/frame_000016.png",
+      "data/frames/chiangmai_intersection/frame_000017.png",
+      "data/frames/chiangmai_intersection/frame_000018.png",
+      "data/frames/chiangmai_intersection/frame_000019.png",
+      "data/frames/chiangmai_intersection/frame_000020.png",
+      "data/frames/chiangmai_intersection/frame_000021.png",
+      "data/frames/chiangmai_intersection/frame_000022.png",
+      "data/frames/chiangmai_intersection/frame_000023.png",
+      "data/frames/chiangmai_intersection/frame_000024.png",
+      "data/frames/chiangmai_intersection/frame_000025.png",
+      "data/frames/chiangmai_intersection/frame_000026.png",
+      "data/frames/chiangmai_intersection/frame_000027.png",
+      "data/frames/chiangmai_intersection/frame_000028.png"
+    ],
+    "extra": {
+      "saved_frame_count": 29,
+      "source_frame_count": 434,
+      "source_fps": 29.97002997002997,
+      "source_width": 1920,
+      "source_height": 1080
+    }
+  }
+}

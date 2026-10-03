@@ -1,0 +1,47 @@
+name: labrelay-pilot
+services:
+  postgres:
+    image: postgres:18.0@sha256:41fc5342eefba6cc2ccda736aaf034bbbb7c3df0fdb81516eba1ba33f360162c
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: labrelay
+      POSTGRES_USER: labrelay
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set a random database password}
+    volumes: ["/srv/labrelay/postgres:/var/lib/postgresql"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U labrelay -d labrelay"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    mem_limit: 512m
+    shm_size: 128m
+    logging:
+      driver: awslogs
+      options:
+        awslogs-region: us-east-2
+        awslogs-group: ${CLOUDWATCH_LOG_GROUP:?required}
+        awslogs-stream: postgres
+  app:
+    image: ${LABRELAY_IMAGE:?supply an image by sha256 digest}
+    restart: unless-stopped
+    depends_on:
+      postgres: {condition: service_healthy}
+    ports: ["127.0.0.1:8080:8080"]
+    environment:
+      DATABASE_URL: postgres://labrelay:${POSTGRES_PASSWORD}@postgres:5432/labrelay?sslmode=disable
+      S3_BUCKET: ${S3_BUCKET:?required}
+      AWS_REGION: us-east-2
+      LABRELAY_LISTEN: 0.0.0.0:8080
+      LABRELAY_TEMP: /tmp/uploads
+    volumes: ["/srv/labrelay/uploads:/tmp/uploads"]
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    mem_limit: 768m
+    stop_grace_period: 60s
+    logging:
+      driver: awslogs
+      options:
+        awslogs-region: us-east-2
+        awslogs-group: ${CLOUDWATCH_LOG_GROUP}
+        awslogs-stream: app

@@ -1,0 +1,7 @@
+[Unit]
+Description=LabRelay operational metrics
+After=docker.service
+[Service]
+Type=oneshot
+EnvironmentFile=/opt/labrelay/.env
+ExecStart=/usr/bin/python3 /opt/labrelay/monitor.py

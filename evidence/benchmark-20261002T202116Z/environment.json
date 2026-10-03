@@ -1,0 +1,17 @@
+{
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "cpus": 12,
+  "repetitions": 10,
+  "bytes": 134217728,
+  "binary_sha256": {
+    "labrelay": "1ccea90be97419e7d8f526e8d4ce5998988a297d029bf0689982b7772cbbce90",
+    "labrelayd": "52df5884669fe4f57ceba07f4a92764d64101356d1988991469ade4df2180c30",
+    "tus-baseline": "27be50fee798844c6f7ea93d7642014faeceaacee849b63d373fa00d04a056c3"
+  },
+  "limitations": [
+    "same-host local storage; not AWS",
+    "RSS sampled at 10ms",
+    "object request counts available as raw tusd metrics; not complete S3 accounting",
+    "no network shaping; 128 MiB default is exploratory"
+  ]
+}

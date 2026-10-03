@@ -1,0 +1,7 @@
+[Unit]
+Description=LabRelay nightly catalog backup
+Requires=docker.service
+After=docker.service
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /opt/labrelay/backup.sh

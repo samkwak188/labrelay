@@ -1,0 +1,6 @@
+* text=auto eol=lf
+*.gz binary
+*.png binary
+*.jpg binary
+*.zip binary
+testdata/** -text whitespace=cr-at-eol
