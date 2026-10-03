@@ -2,6 +2,9 @@ name: Restricted real S3 acceptance
 on: workflow_dispatch
 permissions:
   contents: read
+concurrency:
+  group: aws-acceptance
+  cancel-in-progress: false
 jobs:
   acceptance:
     if: github.ref == 'refs/heads/main'
@@ -10,8 +13,16 @@ jobs:
       contents: read
       id-token: write
     runs-on: ubuntu-24.04
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v5
+      - name: Check acceptance configuration
+        env:
+          ACCEPTANCE_ROLE: ${{ vars.AWS_ACCEPTANCE_ROLE_ARN }}
+          ACCEPTANCE_BUCKET: ${{ vars.AWS_ACCEPTANCE_BUCKET }}
+        run: |
+          test -n "$ACCEPTANCE_ROLE" || { echo 'Configure AWS_ACCEPTANCE_ROLE_ARN in the aws-acceptance environment'; exit 1; }
+          test -n "$ACCEPTANCE_BUCKET" || { echo 'Configure AWS_ACCEPTANCE_BUCKET in the aws-acceptance environment'; exit 1; }
       - uses: actions/setup-go@v6
         with: {go-version: '1.27.1', cache: true}
       - uses: aws-actions/configure-aws-credentials@v5
@@ -26,4 +37,13 @@ jobs:
           AWS_REGION: us-east-2
       - uses: actions/upload-artifact@v4
         if: always()
-        with: {name: aws-acceptance, path: aws-acceptance.log}
+        with:
+          name: aws-acceptance-${{ github.sha }}
+          path: |
+            aws-acceptance.log
+            results/local/aws-acceptance-*/**/*.json
+            results/local/aws-acceptance-*/**/*.jsonl
+            results/local/aws-acceptance-*/**/*.log
+          if-no-files-found: warn
+      - if: always()
+        run: docker compose down

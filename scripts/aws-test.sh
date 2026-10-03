@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 cd "$(dirname "$0")/.."
-: "${S3_BUCKET:?dedicated private versioned acceptance bucket required}"
-: "${DATABASE_URL:?isolated PostgreSQL database required}"
-: "${AWS_REGION:?required}"
-[[ -z "${S3_ENDPOINT:-}" ]] || { echo 'AWS acceptance must use real S3, not a custom endpoint' >&2; exit 2; }
+source scripts/test-env.sh aws
+bash scripts/host-preflight.sh
+export LABRELAY_EVIDENCE_ROOT="${LABRELAY_EVIDENCE_ROOT:-$PWD/results/local/aws-acceptance-$(date -u +%Y%m%dT%H%M%SZ)}"
+mkdir -p "$LABRELAY_EVIDENCE_ROOT"
+python3 scripts/aws-preflight.py
 export LABRELAY_INTEGRATION=1
-bash scripts/go.sh test -count=1 -v ./internal/server
+bash scripts/go.sh test -race -count=1 -v ./internal/server 2>&1 | tee "$LABRELAY_EVIDENCE_ROOT/integration.log"
+bash scripts/fault-test.sh aws
+bash scripts/restore-drill.sh aws

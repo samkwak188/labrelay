@@ -70,7 +70,9 @@ For restore:
 5. Run `labrelayd audit-storage` and retain its report. Unknown objects/multipart uploads are evidence for review, never automatic deletion candidates. An older catalog can legitimately omit newer objects.
 6. Start one daemon, check readiness, list a known revision, fetch it from another machine, and verify checksums. Re-enable timers. Record total recovery time and the backup's age. The pilot's fresh-host recovery target is one hour; the local new-database drill does not establish it.
 
-The automated `scripts/restore-drill.sh` creates a **new local database** and preserves its source catalog. It writes a dump, timing and unknown-object report to `results/local/`. Drill databases are intentionally retained for inspection.
+The automated `scripts/restore-drill.sh` creates a **new local Compose database** and preserves its source catalog. It validates every published exact version, then changes only the cloned catalog to inject a missing version, an empty version, a `null` version, a hash mismatch and a size mismatch. Each failed validation must leave maintenance enabled. Repairing the cloned references must allow validation to reopen it. S3 objects are never changed by these injections.
+
+It writes a dump, timing, failure-check logs and unknown-object report to `results/local/`. Revision and file counts are recorded separately. Drill databases are intentionally retained for inspection. `scripts/restore-drill.sh aws` preserves caller AWS credentials and uses real S3 with the same isolated local PostgreSQL catalog; neither mode is a fresh-host restore.
 
 ## Diagnosis
 
@@ -92,4 +94,26 @@ Metrics expose process CPU/RSS, tusd storage operations, verified bytes/files, v
 
 Create a separate versioned acceptance bucket and an OIDC role trusted only by repository `samkwak188/labrelay` and environment `aws-acceptance`. The trust conditions must include audience `sts.amazonaws.com` and subject `repo:samkwak188/labrelay:environment:aws-acceptance`. Restrict the GitHub environment to the protected `main` branch and require a reviewer. Set environment variables `AWS_ACCEPTANCE_ROLE_ARN` and `AWS_ACCEPTANCE_BUCKET`.
 
-The role needs list/version/multipart operations for that bucket and object access only under `uploads/*`; it needs no EC2 or production bucket access. The dispatch-only workflow tests on real AWS S3 using a local isolated PostgreSQL catalog. Untrusted pull requests run only local compatibility tests and receive no cloud credentials. Acceptance objects are retained; use a dedicated disposable test bucket and review its costs/cleanup separately from published pilot datasets.
+The dedicated bucket must have versioning enabled, all four bucket public-access blocks enabled, and SSE-S3 (`AES256`) default encryption. Before any test upload, a read-only preflight checks these settings and requires the bucket owner to match the assumed role's AWS account. It records the caller ARN, account, region, bucket, source commit and workflow run, without credentials. Custom `S3_ENDPOINT`, `AWS_ENDPOINT_URL` and `AWS_ENDPOINT_URL_S3` overrides are rejected, and [configured profile endpoints are ignored](https://docs.aws.amazon.com/sdkref/latest/guide/feature-ss-endpoints.html).
+
+The role needs these permissions:
+
+- On the acceptance bucket ARN: `s3:ListBucket`, `s3:GetBucketVersioning`, `s3:GetBucketPublicAccessBlock`, `s3:GetEncryptionConfiguration`, `s3:ListBucketMultipartUploads`, `s3:ListBucketVersions`.
+- Only on its `uploads/*` objects: `s3:GetObject`, `s3:GetObjectVersion`, `s3:PutObject`, `s3:DeleteObject`, `s3:DeleteObjectVersion`, `s3:AbortMultipartUpload`, `s3:ListMultipartUploadParts`.
+
+It needs no bucket-creation/configuration, EC2 or production bucket access. The [S3 permission reference](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-policy-actions.html) maps the preflight API calls to IAM actions.
+
+The dispatch-only workflow runs integration tests with the race detector, the separate process-crash/network-loss suite, and the restore/failure-injection drill. Runs are serialized and use a local isolated Compose PostgreSQL catalog. Untrusted pull requests receive no cloud credentials. To run from a Linux checkout after configuring an AWS profile and starting the isolated PostgreSQL service:
+
+```bash
+export AWS_PROFILE=YOUR_ACCEPTANCE_PROFILE
+export AWS_REGION=us-east-2
+export S3_BUCKET=YOUR_DEDICATED_ACCEPTANCE_BUCKET
+export DATABASE_URL='postgres://labrelay:local-development-only@127.0.0.1:15432/labrelay?sslmode=disable'
+docker compose up -d --wait postgres
+bash scripts/aws-test.sh
+```
+
+Do not source `local-env.sh` for AWS runs. The AWS entry point preserves caller credentials. Logs and JSON evidence go under `results/local/aws-acceptance-*`; GitHub uploads these even after failure, excluding the catalog dump. A passing run establishes real S3 behavior and restore validation with a runner-local catalog, not EC2 operation, alert delivery, or fresh-host recovery.
+
+Acceptance objects are retained; use a dedicated disposable test bucket and review its costs/cleanup separately from published pilot datasets.

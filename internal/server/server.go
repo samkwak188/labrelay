@@ -738,6 +738,9 @@ func (s *Server) download(w http.ResponseWriter, r *http.Request) {
 
 // VerifyVersion is shared by the online verifier and offline restore validation.
 func (s *Server) VerifyVersion(ctx context.Context, key, version, expected string, size int64) error {
+	if key == "" || version == "" || version == "null" {
+		return errors.New("exact object key and version required for verification")
+	}
 	obj, e := s.S3.GetObject(ctx, &s3.GetObjectInput{Bucket: aws.String(s.C.Bucket), Key: aws.String(key), VersionId: aws.String(version)})
 	if e != nil {
 		return e

@@ -5,17 +5,25 @@ permissions:
 jobs:
   linux:
     runs-on: ubuntu-24.04
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-go@v6
         with: {go-version: '1.27.1', cache: true}
       - run: bash scripts/check.sh
+      - run: python3 -m unittest discover -s scripts -p 'test_*.py' -v
       - run: docker compose up -d --wait
       - run: bash scripts/test.sh integration
       - run: bash scripts/fault-test.sh
+      - run: bash scripts/restore-drill.sh
       - uses: actions/upload-artifact@v4
         if: always()
-        with: {name: fault-evidence, path: results/local/}
+        with:
+          name: recovery-evidence-${{ github.sha }}
+          path: |
+            results/local/**/*.json
+            results/local/**/*.jsonl
+            results/local/**/*.log
       - if: always()
         run: docker compose down
   infrastructure:

@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """Actual daemon termination and response-loss tests. Uses isolated project IDs.
-Requires local-env.sh and built binaries. Raw logs/results are retained, never fabricated.
+Requires an explicit test backend and built binaries. Raw logs/results are retained.
 """
 import base64, hashlib, http.client, http.server, json, os, pathlib, signal, socket, subprocess, tempfile, threading, time, urllib.error, urllib.request, uuid
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-OUT = ROOT / 'results' / 'local' / ('faults-' + time.strftime('%Y%m%dT%H%M%SZ', time.gmtime()))
-OUT.mkdir(parents=True)
+OUT = pathlib.Path(os.environ.get('LABRELAY_EVIDENCE_ROOT', ROOT / 'results' / 'local')) / ('faults-' + time.strftime('%Y%m%dT%H%M%SZ', time.gmtime()))
+OUT.mkdir(parents=True, exist_ok=False)
 ENV = os.environ.copy()
+(OUT/'environment.json').write_text(json.dumps({'storage_backend': ENV.get('LABRELAY_TEST_BACKEND', 'unspecified'), 'region': ENV.get('AWS_REGION'), 'bucket': ENV.get('S3_BUCKET'), 'commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip(), 'workflow_run': ENV.get('GITHUB_RUN_ID')}, indent=2)+'\n')
 PROJECT = 'fault-' + uuid.uuid4().hex
 TOKEN = subprocess.check_output([str(ROOT/'bin/labrelayd'), 'token', PROJECT, 'write'], env=ENV, text=True).strip()
 ENV.update(LABRELAY_TOKEN=TOKEN, LABRELAY_PROJECT=PROJECT)

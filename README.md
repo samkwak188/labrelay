@@ -73,12 +73,14 @@ Stop a development daemon before running server integration/fault tests: the cat
 bash scripts/check.sh                  # format, vet, unit, race, fuzz smoke
 bash scripts/test.sh integration       # real local PostgreSQL + S3
 bash scripts/fault-test.sh             # actual process deaths and response loss
-bash scripts/restore-drill.sh          # NEW local database, exact-version checks
+bash scripts/restore-drill.sh          # NEW local database, exact-version failure checks
 bash scripts/benchmark.sh              # 10 paired measurements + warm-up
 bash scripts/release.sh 0.1.0-rc.2      # Linux amd64/arm64 archives + SHA-256
 ```
 
 Raw operational outputs go to `results/local/` and are excluded from Git. Selected evidence belongs in `evidence/`, with its environment and limitations. The release script produces `dist/`; it does not publish to GitHub or provision AWS.
+
+The dispatch-only AWS acceptance workflow runs integration/race checks, process/network faults, and the new-database restore drill against a dedicated private versioned SSE-S3 bucket. It requires AWS OIDC configuration; see the [runbook](docs/runbook.md#restricted-real-s3-ci). Its PostgreSQL catalog stays on the Linux runner, so this does not establish a fresh cloud-host restore.
 
 - [Architecture, invariants and limits](docs/architecture.md)
 - [OpenAPI contract](api/openapi.yaml)
