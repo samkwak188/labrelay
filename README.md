@@ -4,7 +4,7 @@ LabRelay snapshots completed datasets, resumes interrupted tus uploads, independ
 
 **Status: implemented local release candidate, not a completed cloud pilot.** The implementation has run against real PostgreSQL 18 and versioned SeaweedFS in WSL2. See [validation evidence](docs/validation.md) for measured results and remaining acceptance gates. Real AWS acceptance, a fresh cloud-host restore, and the 14-day independent-user trial remain outstanding.
 
-**Current environment blocker:** C: filled during the final benchmark. About 805 MB of generated provider cache was reclaimed, but WSL could not restart. Source and evidence are preserved. Final regression checks and release rebuild must run after the host recovers; older `dist/` packages are explicitly marked **do not release**.
+**Regression status:** [GitHub CI passed for `7b838b5`](https://github.com/samkwak188/labrelay/actions/runs/37096331456), including format/vet/unit/race/fuzz checks, local PostgreSQL/S3-compatible integration, process/network fault tests, and Terraform validation. The earlier workstation disk failure still left the corrected benchmark incomplete and older release packages stale. Release artifacts require a fresh build; real AWS acceptance and the cloud pilot remain open.
 
 ## Run locally
 

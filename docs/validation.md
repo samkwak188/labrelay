@@ -1,6 +1,12 @@
 # Validation and release status
 
-LabRelay is an implemented local candidate, **not a completed cloud/peer pilot**. Final validation was interrupted when the Windows host C: drive filled. Removing the generated Terraform provider cache recovered about 805 MB, but Ubuntu WSL still failed to start and Docker commands became unresponsive. No source, original dataset, catalog or published object was deleted to free space.
+LabRelay is an implemented local candidate, **not a completed cloud/peer pilot**. The original workstation's final validation was interrupted when its Windows C: drive filled. Removing the generated Terraform provider cache recovered about 805 MB, but Ubuntu WSL still failed to start and Docker commands became unresponsive. No source, original dataset, catalog or published object was deleted to free space. GitHub CI subsequently completed regression validation of the committed implementation.
+
+## Verified in GitHub CI
+
+[CI run 37096331456](https://github.com/samkwak188/labrelay/actions/runs/37096331456) passed for commit `7b838b5d9fe5323c0b4473891e10ac8a7a8d8a7b` on Ubuntu 24.04. It ran formatting, vet, unit and race checks, both manifest/path fuzz smoke tests, real local PostgreSQL/S3-compatible integration, the separate process-death/network-loss fault suite, and Terraform format/locked-provider validation.
+
+This validates the final spool inventory/destination binding and publication regression-test setup changes. It does not establish real AWS behavior, a completed benchmark, rebuilt release artifacts, or a cloud deployment.
 
 ## Verified locally before the host failure
 
@@ -26,11 +32,11 @@ The environment was Ubuntu under WSL2, Go 1.27.1, PostgreSQL 18.0 and the pinned
 | Infrastructure | Terraform 1.16.5 and locked AWS provider validated; no AWS resources applied |
 | Packaging | Container and Linux archives built at an earlier source revision; final rebuild is blocked |
 
-Selected raw evidence is in [`evidence/`](../evidence/); complete development logs remain under ignored `results/local/`. The workspace has no fabricated Git commit ID. Source fingerprints identify the saved code.
+Selected raw evidence is in [`evidence/`](../evidence/); complete development logs remain under ignored `results/local/`. The original local evidence predates Git initialization; source fingerprints identify that saved code. The CI result above identifies the tested Git commit.
 
-The last full passing suite preceded the final spool inventory/destination-binding change and the fresh-database setup change in the publication regression test. **The updated application binaries compiled and ran six measured corrected benchmark pairs successfully**, but those final changes still need the complete checks rerun. Do not describe the current workspace as fully regression-tested.
+The last full passing workstation suite preceded the final spool inventory/destination-binding change and the fresh-database setup change in the publication regression test. **The updated application binaries compiled and ran six measured corrected benchmark pairs successfully** before disk exhaustion. The subsequent GitHub CI run passed the complete regression workflow for those changes; the corrected ten-pair benchmark remains incomplete.
 
-A host-space preflight was added after the incident to the local build/test/benchmark entry points. Its execution also remains pending environment recovery.
+A host-space preflight was added after the incident to the local build/test/benchmark entry points. CI exercised its Linux checks; its WSL backing-disk check still needs execution on a recovered WSL host.
 
 ## Defects found and fixed
 
@@ -44,7 +50,7 @@ A host-space preflight was added after the incident to the local build/test/benc
 
 ## Required gates still open
 
-1. Restore adequate host free space, recover WSL/Docker, run `scripts/validate-local.sh`, repeat the corrected ten-pair benchmark, and rebuild release artifacts. `dist/DO-NOT-RELEASE.txt` identifies stale packages.
+1. Repeat the corrected ten-pair benchmark on a working Linux host and rebuild release artifacts. On the original workstation, recover host free space and WSL/Docker first. Its `dist/DO-NOT-RELEASE.txt` identifies stale packages. Regression validation of commit `7b838b5` has passed in CI.
 2. Run real AWS S3 multipart/version, process-crash and network-loss acceptance. The OIDC workflow exists; no AWS credentials/configuration were available here.
 3. Test controlled mid-write collector/server ENOSPC on constrained Linux filesystems. The actual Windows backing-disk failure is **not** a passing controlled durability test.
 4. Expand randomized cleanup/expiration/transfer races, concurrent registration by two independent collectors, and missing/corrupt-version restore failure injection. Existing checks cover narrower deterministic cases.
