@@ -1,0 +1,7 @@
+{
+  "storage_backend": "local",
+  "region": "us-east-2",
+  "bucket": "labrelay-local",
+  "commit": "59702323164fb3887309f9059821aaa0b48de9a4",
+  "workflow_run": "37163282788"
+}

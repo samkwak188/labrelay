@@ -4,7 +4,9 @@ LabRelay snapshots completed datasets, resumes interrupted tus uploads, independ
 
 **Status: implemented local release candidate, not a completed cloud pilot.** The implementation has run against real PostgreSQL 18 and versioned SeaweedFS in WSL2. See [validation evidence](docs/validation.md) for measured results and remaining acceptance gates. Real AWS acceptance, a fresh cloud-host restore, and the 14-day independent-user trial remain outstanding.
 
-**Regression status:** [GitHub CI passed for `7b838b5`](https://github.com/samkwak188/labrelay/actions/runs/37096331456), including format/vet/unit/race/fuzz checks, local PostgreSQL/S3-compatible integration, process/network fault tests, and Terraform validation. The earlier workstation disk failure still left the corrected benchmark incomplete and older release packages stale. Release artifacts require a fresh build; real AWS acceptance and the cloud pilot remain open.
+**Regression status:** [GitHub CI passed for `5970232`](https://github.com/samkwak188/labrelay/actions/runs/37163282788), including format/vet/unit/race/fuzz checks, ten acceptance-harness tests, local PostgreSQL/S3-compatible integration, eight process/network fault scenarios, five restore failure cases, and Terraform validation.
+
+**Packaging:** [Release candidate `0.1.0-rc.2` was rebuilt from `5970232`](https://github.com/samkwak188/labrelay/actions/runs/37163327369), producing Linux amd64/arm64 archives and a successful container build. Downloaded archive checksums and architecture headers were independently checked; see [release evidence](evidence/release-37163327369/result.json). The container has not been published to a registry. The corrected benchmark, real AWS acceptance, and cloud/peer pilot remain open.
 
 ## Run locally
 

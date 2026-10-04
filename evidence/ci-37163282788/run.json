@@ -1,0 +1,24 @@
+{
+  "workflow": "CI",
+  "run_id": 37163282788,
+  "run_url": "https://github.com/samkwak188/labrelay/actions/runs/37163282788",
+  "commit": "59702323164fb3887309f9059821aaa0b48de9a4",
+  "conclusion": "success",
+  "runner": "ubuntu-24.04",
+  "go_version": "1.27.1",
+  "completed_at": "2026-10-03T23:56:30Z",
+  "checks": [
+    "format, vet, unit, race, manifest/path fuzz smoke",
+    "10 AWS acceptance harness tests using mocks and local Bash",
+    "real local PostgreSQL and versioned SeaweedFS integration",
+    "8 process-death and network-loss scenarios",
+    "new-database restore with 5 failing reference cases and repaired validation",
+    "Terraform format and locked-provider validation"
+  ],
+  "limitations": [
+    "PostgreSQL and S3-compatible storage run on the same GitHub Linux runner",
+    "AWS preflight tests use mocks; no real AWS resources or credentials were used",
+    "The restore is to a new database, not a fresh cloud host",
+    "No cloud, benchmark or independent-user trial outcome is claimed"
+  ]
+}

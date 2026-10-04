@@ -1,0 +1,57 @@
+{
+  "kind": "release-candidate-verification",
+  "status": "pass",
+  "version": "0.1.0-rc.2",
+  "source_commit": "59702323164fb3887309f9059821aaa0b48de9a4",
+  "workflow_run": 37163327369,
+  "workflow_url": "https://github.com/samkwak188/labrelay/actions/runs/37163327369",
+  "workflow_conclusion": "success",
+  "container_build": "pass",
+  "archives": [
+    {
+      "archive": "labrelay-0.1.0-rc.2-linux-amd64.tar.gz",
+      "size_bytes": 12252481,
+      "sha256": "e7262462307b0b415389b02a51db5d0e4cf512e5fe792ba799c24f30fedc8f00",
+      "checksum_verified": true,
+      "binaries": [
+        {
+          "name": "labrelay",
+          "size_bytes": 14049440,
+          "elf_architecture": "amd64",
+          "executable": true
+        },
+        {
+          "name": "labrelayd",
+          "size_bytes": 18370720,
+          "elf_architecture": "amd64",
+          "executable": true
+        }
+      ]
+    },
+    {
+      "archive": "labrelay-0.1.0-rc.2-linux-arm64.tar.gz",
+      "size_bytes": 11124566,
+      "sha256": "15d4f277f96a75dd728dcde75c9146a18132e3bffa784fa8d8eee753eba12c49",
+      "checksum_verified": true,
+      "binaries": [
+        {
+          "name": "labrelay",
+          "size_bytes": 13369504,
+          "elf_architecture": "arm64",
+          "executable": true
+        },
+        {
+          "name": "labrelayd",
+          "size_bytes": 17039520,
+          "elf_architecture": "arm64",
+          "executable": true
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Archives were inspected without executing the Linux binaries on this Windows host",
+    "The container was built in CI but not published to a registry",
+    "Artifacts are release candidates; AWS and peer-pilot gates remain open"
+  ]
+}

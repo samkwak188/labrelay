@@ -1,0 +1,39 @@
+{
+  "kind": "local-new-database-restore",
+  "status": "pass",
+  "storage_backend": "local",
+  "commit": "59702323164fb3887309f9059821aaa0b48de9a4",
+  "workflow_run": "37163282788",
+  "restored_database": "labrelay_restore_f2bd0f11044d4b8bae0536862c5d4d1b",
+  "fresh_cloud_host": false,
+  "failure_checks": [
+    {
+      "scenario": "missing-version",
+      "status": "pass",
+      "maintenance_retained": true
+    },
+    {
+      "scenario": "empty-version",
+      "status": "pass",
+      "maintenance_retained": true
+    },
+    {
+      "scenario": "null-version",
+      "status": "pass",
+      "maintenance_retained": true
+    },
+    {
+      "scenario": "corrupt-hash",
+      "status": "pass",
+      "maintenance_retained": true
+    },
+    {
+      "scenario": "wrong-size",
+      "status": "pass",
+      "maintenance_retained": true
+    }
+  ],
+  "published_revisions_checked": 9,
+  "published_files_checked": 11,
+  "seconds": 3.4297372550000063
+}
